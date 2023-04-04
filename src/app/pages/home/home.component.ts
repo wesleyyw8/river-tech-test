@@ -1,5 +1,7 @@
-import { Component, ChangeDetectionStrategy } from "@angular/core";
-import { Observable } from "rxjs";
+import { Component, ChangeDetectionStrategy, OnDestroy } from "@angular/core";
+import { Observable, Subject } from "rxjs";
+import { ChangeDetectorRef } from '@angular/core';
+import { takeUntil } from 'rxjs/operators';
 
 import { GameMockClient, Game } from "../../shared";
 
@@ -8,16 +10,26 @@ const NAME_KEBAB = "app-home";
 @Component({
 	templateUrl: "./home.component.html",
 	styleUrls: ["./home.scss"],
+	// eslint-disable-next-line @angular-eslint/no-host-metadata-property
 	host: { class: NAME_KEBAB },
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HomeComponent {
-
-	gamesData$: Observable<Game[]>;
+export class HomeComponent implements OnDestroy {
+	private ngUnsubscribe = new Subject<void>();
+	public gamesData: Game[] = [];
 
 	constructor(
-		gameMockClient: GameMockClient
+		private gameMockClient: GameMockClient,
+		private changeDetector: ChangeDetectorRef
 	) {
-		this.gamesData$ = gameMockClient.getAll$();
+		gameMockClient.getAll$()
+		.pipe(takeUntil(this.ngUnsubscribe))
+		.subscribe((games: Game[]) => {
+			this.gamesData = games;
+			this.changeDetector.markForCheck();
+		});
+	}
+	ngOnDestroy(): void {
+		this.ngUnsubscribe.complete();
 	}
 }
