@@ -1,17 +1,39 @@
 @import "@app/colors";
 @import "@app/mixins";
 
+:host {
+	overflow-x: hidden;
+	overflow-y: auto;
+}
+
 .app-home {
 	&__title {
 		text-align: center;
 	}
-
-	&__json-data-container {
-		background-color: $black;
-		color: $white;
-
+	&__card {
+		box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+		transition: 0.3s;
+		padding: 30px;
+		&:hover {
+			box-shadow: 0 8px 36px 0 rgba(0,0,0,0.2);
+			padding: 20px;
+		}
+	}
+	&__detail {
+		padding: 2px 16px;
+	}
+	
+	&__games-container { 
+		display: grid;
+		grid-template-columns: 1fr 1fr 1fr 1fr;
 		@include breakpoint("xsmall") {
-			color: $neon-green;
+			grid-template-columns: 1fr;
+		}
+		@include breakpoint("small") {
+			grid-template-columns: 1fr;
+		}
+		@include breakpoint("medium") {
+			grid-template-columns: 1fr 1fr;
 		}
 	}
 }
