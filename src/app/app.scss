@@ -1,8 +1,15 @@
+@import "@app/mixins";
+
 :host {
   display: grid;
   grid-template-columns: 1fr 0 5fr;
   grid-template-rows: calc(90vh - 20px) 10vh;
   grid-gap: 20px;
+  @include breakpoint("small") {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    grid-gap: 0;
+  }
 }
 
 .side-menu {
