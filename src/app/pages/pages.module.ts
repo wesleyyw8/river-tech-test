@@ -1,25 +1,19 @@
-import { CommonModule } from "@angular/common";
-import { NgModule } from "@angular/core";
-import { HomeComponent } from "./home/home.component";
+import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
+import { HomeComponent } from './home/home.component';
+import { AppPagesRoutingModule } from './pages-routing.module';
+import { NgxsModule } from '@ngxs/store';
+import { GamesState } from './state/game.state';
 
-import { AppPagesRoutingModule } from "./pages-routing.module";
-
-const COMPONENTS = [
-	HomeComponent,
-];
+const COMPONENTS = [HomeComponent];
 
 @NgModule({
 	imports: [
 		CommonModule,
 		AppPagesRoutingModule,
+		NgxsModule.forFeature([GamesState])
 	],
-	declarations: [
-		...COMPONENTS
-	],
-	exports: [
-		...COMPONENTS
-	]
+	declarations: [...COMPONENTS],
+	exports: [...COMPONENTS]
 })
-export class AppPagesModule {
-
-}
+export class AppPagesModule {}
