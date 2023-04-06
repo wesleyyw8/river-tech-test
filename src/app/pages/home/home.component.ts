@@ -10,7 +10,7 @@ import { ChangeDetectorRef } from '@angular/core';
 import { takeUntil } from 'rxjs/operators';
 import { Select, Store } from '@ngxs/store';
 
-import { selectGames } from './../state/games.selectors';
+import { selectTrendingGames } from './../state/games.selectors';
 import { GameMockClient, Game } from '../../shared';
 import { LoadGames } from '../state/games.actions';
 
@@ -27,7 +27,7 @@ export class HomeComponent implements OnDestroy, OnInit {
 	private ngUnsubscribe = new Subject<void>();
 	public gamesData: Game[] = [];
 
-	@Select(selectGames) games$!: Observable<Game[]>;
+	@Select(selectTrendingGames) games$!: Observable<Game[]>;
 
 	constructor(
 		private gameMockClient: GameMockClient,
