@@ -3,7 +3,7 @@
 <div class="app-home__content">
 	<div class="app-home__games-container">
 		<div class="app-home__card" *ngFor="let game of gamesData">
-			<img [src]="game.thumb?.url" [alt]="game.thumb?.title" style="width:100%">
+			<img [src]="game.thumb?.url" [alt]="game.thumb?.title">
 			<div class="app-home__detail">
 				<h4><b>{{game.title}}</b></h4> 
 				<p>{{game.providerName}}</p> 

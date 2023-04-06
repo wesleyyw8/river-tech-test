@@ -20,9 +20,13 @@
     padding: 8px 0;
     cursor: pointer;
     text-decoration: none;
+    font-size: large;
     &:hover {
       color: $black;
       background-color: $hover-menu;
+    }
+    &.active {
+      color: red;
     }
   }
 }

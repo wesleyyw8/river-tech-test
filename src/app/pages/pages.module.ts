@@ -6,8 +6,9 @@ import { NgxsModule } from '@ngxs/store';
 import { GamesState } from './state/games.state';
 import { NgxsEffectsModule } from 'ngxs-effects';
 import { GamesEffects } from './state/games.effects';
+import { GamesComponent } from './games/games.component';
 
-const COMPONENTS = [HomeComponent];
+const COMPONENTS = [HomeComponent, GamesComponent];
 
 @NgModule({
 	imports: [

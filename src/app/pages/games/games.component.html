@@ -1,0 +1,14 @@
+<h1 class="app-games__title">Games</h1>
+
+<div class="app-games__content">
+	<div class="app-games__games-container">
+		<div class="app-games__card" *ngFor="let game of gamesData">
+			<div class="app-games__hot" [ngClass]="{show: game.tag === 'hot'}">30% Off</div>
+			<img [src]="game.thumb?.url" [alt]="game.thumb?.title">
+			<div class="app-games__detail">
+				<h4><b>{{game.title}}</b></h4> 
+				<p>{{game.providerName}}</p> 
+			</div>
+		</div>
+	</div>
+</div>

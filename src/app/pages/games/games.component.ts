@@ -1,38 +1,43 @@
 /* eslint-disable no-unused-vars */
 import {
-	Component,
 	ChangeDetectionStrategy,
+	ChangeDetectorRef,
+	Component,
 	OnDestroy,
 	OnInit
 } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
-import { ChangeDetectorRef } from '@angular/core';
-import { takeUntil } from 'rxjs/operators';
 import { Select, Store } from '@ngxs/store';
-
-import { selectGames, selectTrendingGames } from './../state/games.selectors';
-import { Game } from '../../shared';
+import { Observable, Subject } from 'rxjs';
+import { Game } from 'src/app/shared';
+import { selectGames } from '../state/games.selectors';
+import { takeUntil } from 'rxjs/operators';
 import { LoadGames } from '../state/games.actions';
 
-const NAME_KEBAB = 'app-home';
+const NAME_KEBAB = 'app-games';
 
 @Component({
-	templateUrl: './home.component.html',
-	styleUrls: ['./home.scss'],
+	selector: 'app-games',
+	templateUrl: './games.component.html',
+	styleUrls: ['./games.component.scss'],
 	// eslint-disable-next-line @angular-eslint/no-host-metadata-property
 	host: { class: NAME_KEBAB },
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class HomeComponent implements OnDestroy, OnInit {
+export class GamesComponent implements OnDestroy, OnInit {
 	private ngUnsubscribe = new Subject<void>();
 	public gamesData: Game[] = [];
 
-	@Select(selectTrendingGames) games$!: Observable<Game[]>;
+	@Select(selectGames) games$!: Observable<Game[]>;
 
 	constructor(
 		private changeDetector: ChangeDetectorRef,
 		private store: Store
 	) {}
+
+	ngOnDestroy(): void {
+		this.ngUnsubscribe.complete();
+	}
+
 	ngOnInit(): void {
 		this.store.dispatch(new LoadGames());
 
@@ -40,8 +45,5 @@ export class HomeComponent implements OnDestroy, OnInit {
 			this.gamesData = games;
 			this.changeDetector.markForCheck();
 		});
-	}
-	ngOnDestroy(): void {
-		this.ngUnsubscribe.complete();
 	}
 }
