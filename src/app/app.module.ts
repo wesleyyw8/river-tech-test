@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 import { AppPagesModule } from './pages/pages.module';
 import { NgxsModule } from '@ngxs/store';
 import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
+import { NgxsEffectsModule } from 'ngxs-effects';
 
 @NgModule({
 	declarations: [AppComponent],
@@ -18,6 +19,7 @@ import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 		BrowserModule,
 		AppPagesModule,
 		NgxsModule.forRoot(),
+		NgxsEffectsModule.forRoot(),
 		NgxsReduxDevtoolsPluginModule.forRoot()
 	],
 	providers: [],
