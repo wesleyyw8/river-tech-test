@@ -1,4 +1,4 @@
-<div class="app-card__card">
+<div class="app-card__card" *ngIf="game">
   <div class="app-card__hot" [ngClass]="{show: game.tag === 'hot'}">30% Off</div>
   <img [src]="game.thumb?.url" [alt]="game.thumb?.title">
   <div class="app-card__detail">

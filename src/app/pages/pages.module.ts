@@ -8,6 +8,7 @@ import { NgxsEffectsModule } from 'ngxs-effects';
 import { GamesEffects } from './state/games.effects';
 import { GamesComponent } from './games/games.component';
 import { CardComponent } from './components/card/card.component';
+import {  ReactiveFormsModule } from '@angular/forms';
 
 const COMPONENTS = [HomeComponent, GamesComponent, CardComponent];
 
@@ -16,7 +17,8 @@ const COMPONENTS = [HomeComponent, GamesComponent, CardComponent];
 		CommonModule,
 		AppPagesRoutingModule,
 		NgxsModule.forFeature([GamesState]),
-		NgxsEffectsModule.forFeature(GamesEffects)
+		NgxsEffectsModule.forFeature(GamesEffects),
+		ReactiveFormsModule
 	],
 	declarations: [...COMPONENTS],
 	exports: [...COMPONENTS]

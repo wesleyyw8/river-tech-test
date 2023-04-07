@@ -1,6 +1,7 @@
 .cards-container { 
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
+  padding-bottom: 10px;
   @include breakpoint("xsmall") {
     grid-template-columns: 1fr;
   }

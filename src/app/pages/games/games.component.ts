@@ -10,8 +10,10 @@ import { Select, Store } from '@ngxs/store';
 import { Observable, Subject } from 'rxjs';
 import { Game } from 'src/app/shared';
 import { selectGames } from '../state/games.selectors';
-import { takeUntil } from 'rxjs/operators';
+import { delay, first, take, takeUntil } from 'rxjs/operators';
 import { LoadGames } from '../state/games.actions';
+import { FormControl } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 
 const NAME_KEBAB = 'app-games';
 
@@ -29,9 +31,13 @@ export class GamesComponent implements OnDestroy, OnInit {
 
 	@Select(selectGames) games$!: Observable<Game[]>;
 
+	searchField: FormControl = new FormControl();
+
 	constructor(
 		private changeDetector: ChangeDetectorRef,
-		private store: Store
+		private store: Store,
+		private router: Router,
+		private activatedRoute: ActivatedRoute
 	) {}
 
 	ngOnDestroy(): void {
@@ -45,5 +51,27 @@ export class GamesComponent implements OnDestroy, OnInit {
 			this.gamesData = games;
 			this.changeDetector.markForCheck();
 		});
+
+		this.searchField.valueChanges
+			.pipe(takeUntil(this.ngUnsubscribe), delay(500))
+			.subscribe((value: string) => {
+				this.router.navigate([], {
+					relativeTo: this.activatedRoute,
+					queryParams: {
+						searchTerm: value
+					},
+					queryParamsHandling: 'merge'
+				});
+			});
+
+		this.activatedRoute.queryParams
+			// .pipe(takeUntil(this.ngUnsubscribe), first())
+			.pipe(take(1))
+			.subscribe((params) => {
+				const searchTerm = params['searchTerm'];
+				if (searchTerm) {
+					this.searchField.setValue(searchTerm);
+				}
+			});
 	}
 }
