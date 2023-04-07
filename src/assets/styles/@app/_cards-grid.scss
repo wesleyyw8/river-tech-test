@@ -1,0 +1,13 @@
+.cards-container { 
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  @include breakpoint("xsmall") {
+    grid-template-columns: 1fr;
+  }
+  @include breakpoint("small") {
+    grid-template-columns: 1fr;
+  }
+  @include breakpoint("medium") {
+    grid-template-columns: 1fr 1fr;
+  }
+}
