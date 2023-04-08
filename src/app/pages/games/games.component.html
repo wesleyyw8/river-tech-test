@@ -2,11 +2,11 @@
 <div class="app-games__command-bar">
 	<div class="app-games__search-container">
 		<label for="search">Search</label>
-		<input type="search" [formControl]="searchField">
+		<input type="search" name="search" [formControl]="searchField">
 	</div>
 	<div class="app-games__search-container">
 		<label for="games">Choose a car:</label>
-		<select name="games" id="games">
+		<select name="games" id="games" [formControl]="selectGamesField">
 			<option value="volvo">Volvo</option>
 			<option value="saab">Saab</option>
 			<option value="opel">Opel</option>

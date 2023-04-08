@@ -32,6 +32,7 @@ export class GamesComponent implements OnDestroy, OnInit {
 	@Select(selectGames) games$!: Observable<Game[]>;
 
 	searchField: FormControl = new FormControl();
+	selectGamesField: FormControl = new FormControl();
 
 	constructor(
 		private changeDetector: ChangeDetectorRef,
@@ -64,9 +65,20 @@ export class GamesComponent implements OnDestroy, OnInit {
 				});
 			});
 
+		this.selectGamesField.valueChanges
+			.pipe(takeUntil(this.ngUnsubscribe), delay(500))
+			.subscribe((value: string) => {
+				this.router.navigate([], {
+					relativeTo: this.activatedRoute,
+					queryParams: {
+						provider: value
+					},
+					queryParamsHandling: 'merge'
+				});
+			});
+
 		this.activatedRoute.queryParams
-			// .pipe(takeUntil(this.ngUnsubscribe), first())
-			.pipe(take(1))
+			.pipe(take(1)) //it will complete the subscription so no need to unsubscribe.
 			.subscribe((params) => {
 				const searchTerm = params['searchTerm'];
 				if (searchTerm) {
