@@ -9,6 +9,7 @@ import { GamesEffects } from './state/games.effects';
 import { GamesComponent } from './games/games.component';
 import { CardComponent } from './components/card/card.component';
 import {  FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { GameDetailComponent } from './game-detail/game-detail.component';
 
 const COMPONENTS = [HomeComponent, GamesComponent, CardComponent];
 
@@ -21,7 +22,7 @@ const COMPONENTS = [HomeComponent, GamesComponent, CardComponent];
 		ReactiveFormsModule,
 		FormsModule
 	],
-	declarations: [...COMPONENTS],
+	declarations: [...COMPONENTS, GameDetailComponent],
 	exports: [...COMPONENTS]
 })
 export class AppPagesModule {}

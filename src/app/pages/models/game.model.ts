@@ -1,7 +1,7 @@
 import { GameInterface } from './game.interface';
 
 export class Game implements GameInterface {
-	id: number;
+	id: string;
 	tag: string;
 	slug: string;
 	title: string;
@@ -9,6 +9,7 @@ export class Game implements GameInterface {
 	startUrl: string;
 	thumb: { url: string; title: string };
 
+	// eslint-disable-next-line no-unused-vars
 	constructor(game: GameInterface) {
 		this.id = game.id;
 		this.title = game.title;

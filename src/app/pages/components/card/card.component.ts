@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Game } from '../../models/game.model';
+import { Router } from '@angular/router';
 
 @Component({
 	selector: 'app-card',
@@ -8,5 +9,10 @@ import { Game } from '../../models/game.model';
 })
 export class CardComponent {
 	@Input() game?: Game;
-	constructor() {}
+	// eslint-disable-next-line no-unused-vars
+	constructor(private router: Router) {}
+
+	public goToGameDetails(id: string): void {
+		this.router.navigate(['/games/detail', id]);
+	}
 }

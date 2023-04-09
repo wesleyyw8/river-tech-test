@@ -1,4 +1,4 @@
-<div class="app-card__card" *ngIf="game">
+<div class="app-card__card" *ngIf="game" (click)="goToGameDetails(game.id)">
   <div class="app-card__hot" [ngClass]="{'app-card__hot-visible': game.isHot()}">HOT!</div>
   <img [src]="game.thumb?.url" [alt]="game.thumb?.title">
   <div class="app-card__detail">
