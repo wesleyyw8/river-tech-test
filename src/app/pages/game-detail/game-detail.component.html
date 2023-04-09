@@ -1,1 +1,7 @@
-<p>game-detail works!</p>
+<div class="cards-container" *ngIf="game">
+  <app-card [game]="game">
+    <a [href]="game.startUrl" target="_blank">
+      <button>Play for fun</button>
+    </a>
+  </app-card>
+</div>

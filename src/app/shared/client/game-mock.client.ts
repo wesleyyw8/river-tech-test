@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { GameInterface } from '../../pages/models/game.interface';
+import { shareReplay } from 'rxjs/operators';
 
 @Injectable({
 	providedIn: 'root'
@@ -13,6 +14,6 @@ export class GameMockClient {
 	constructor(private http: HttpClient) {}
 
 	getAll$(): Observable<GameInterface[]> {
-		return this.http.get<GameInterface[]>(this.dataURL);
+		return this.http.get<GameInterface[]>(this.dataURL).pipe(shareReplay(1));
 	}
 }

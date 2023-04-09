@@ -1,0 +1,7 @@
+@import "@app/mixins";
+@import '@app/cards-grid';
+
+.cards-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}

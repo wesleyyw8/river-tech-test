@@ -35,3 +35,10 @@ export const selectDistinctProviders = createSelector(
 		return distinctProviders;
 	}
 );
+
+export const selectGameById = createSelector(
+	[selectGames],
+	(games: GameInterface[], id: string) => {
+		return games.find((game) => game.id === id);
+	}
+);
