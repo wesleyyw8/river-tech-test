@@ -21,3 +21,15 @@ export const selectTrendingGames = createSelector(
 			(game: Game) => game.tag === GameTags.TRENDING
 		)
 );
+
+export const selectDistinctProviders = createSelector(
+	[GamesState],
+	(state: GamesStateModel) => {
+		const distinctProviders = Array.from(
+			new Set(
+				GamesSelectors.getGames(state).map((game: Game) => game.providerName)
+			)
+		);
+		return distinctProviders;
+	}
+);

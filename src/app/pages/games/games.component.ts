@@ -1,15 +1,19 @@
 /* eslint-disable no-unused-vars */
 import {
+	AfterViewInit,
 	ChangeDetectionStrategy,
 	ChangeDetectorRef,
 	Component,
+	ElementRef,
 	OnDestroy,
-	OnInit
+	OnInit,
+	QueryList,
+	ViewChildren
 } from '@angular/core';
 import { Select, Store } from '@ngxs/store';
-import { Observable, Subject } from 'rxjs';
+import { Observable, Subject, fromEvent, merge } from 'rxjs';
 import { Game } from 'src/app/shared';
-import { selectGames } from '../state/games.selectors';
+import { selectDistinctProviders, selectGames } from '../state/games.selectors';
 import { delay, first, take, takeUntil } from 'rxjs/operators';
 import { LoadGames } from '../state/games.actions';
 import { FormControl } from '@angular/forms';
@@ -26,13 +30,19 @@ const NAME_KEBAB = 'app-games';
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class GamesComponent implements OnDestroy, OnInit {
-	private ngUnsubscribe = new Subject<void>();
+	private destroy$ = new Subject<void>();
+
 	public gamesData: Game[] = [];
+	public providerData: string[] = [];
 
 	@Select(selectGames) games$!: Observable<Game[]>;
+	@Select(selectDistinctProviders) distinctProviders$!: Observable<string[]>;
 
-	searchField: FormControl = new FormControl();
-	selectGamesField: FormControl = new FormControl();
+	public searchField: FormControl = new FormControl();
+
+	public checkedProviders: string[] = [];
+	public checkboxChangeSubject = new Subject<string[]>();
+	public checkboxChange$ = this.checkboxChangeSubject.asObservable();
 
 	constructor(
 		private changeDetector: ChangeDetectorRef,
@@ -41,37 +51,49 @@ export class GamesComponent implements OnDestroy, OnInit {
 		private activatedRoute: ActivatedRoute
 	) {}
 
+	onCheckboxChange(event: Event, provider: string): void {
+		const checkbox = event.target as HTMLInputElement;
+		if (checkbox.checked) {
+			this.checkedProviders.push(provider);
+		} else {
+			this.checkedProviders = this.checkedProviders.filter(
+				(p) => p !== provider
+			);
+		}
+		this.checkboxChangeSubject.next(this.checkedProviders);
+	}
+
 	ngOnDestroy(): void {
-		this.ngUnsubscribe.complete();
+		this.destroy$.next();
+		this.destroy$.complete();
 	}
 
 	ngOnInit(): void {
 		this.store.dispatch(new LoadGames());
 
-		this.games$.pipe(takeUntil(this.ngUnsubscribe)).subscribe((games) => {
+		this.games$.pipe(takeUntil(this.destroy$)).subscribe((games) => {
 			this.gamesData = games;
 			this.changeDetector.markForCheck();
 		});
 
+		this.games$.pipe(takeUntil(this.destroy$)).subscribe((games) => {
+			this.gamesData = games;
+			this.changeDetector.markForCheck();
+		});
+
+		this.distinctProviders$
+			.pipe(takeUntil(this.destroy$))
+			.subscribe((providers: string[]) => {
+				this.providerData = providers;
+			});
+
 		this.searchField.valueChanges
-			.pipe(takeUntil(this.ngUnsubscribe), delay(500))
+			.pipe(takeUntil(this.destroy$), delay(500))
 			.subscribe((value: string) => {
 				this.router.navigate([], {
 					relativeTo: this.activatedRoute,
 					queryParams: {
 						searchTerm: value
-					},
-					queryParamsHandling: 'merge'
-				});
-			});
-
-		this.selectGamesField.valueChanges
-			.pipe(takeUntil(this.ngUnsubscribe), delay(500))
-			.subscribe((value: string) => {
-				this.router.navigate([], {
-					relativeTo: this.activatedRoute,
-					queryParams: {
-						provider: value
 					},
 					queryParamsHandling: 'merge'
 				});
@@ -84,6 +106,18 @@ export class GamesComponent implements OnDestroy, OnInit {
 				if (searchTerm) {
 					this.searchField.setValue(searchTerm);
 				}
+			});
+
+		this.checkboxChange$
+			.pipe(takeUntil(this.destroy$))
+			.subscribe((checkedProviders) => {
+				this.router.navigate([], {
+					relativeTo: this.activatedRoute,
+					queryParams: {
+						provider: checkedProviders.join(',')
+					},
+					queryParamsHandling: 'merge'
+				});
 			});
 	}
 }

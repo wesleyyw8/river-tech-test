@@ -1,5 +1,6 @@
 @import "@app/mixins";
 @import '@app/cards-grid';
+@import "@app/colors";
 
 :host {
 	overflow-x: hidden;
@@ -11,5 +12,91 @@
 		display: grid;
     grid-template-columns: 1fr 1fr;
 		padding-bottom: 10px;
+		position: relative;
 	}
+}
+
+#search {
+  margin-left: 5px;
+}
+
+.select-container {
+  border: none;
+  display: block;
+	.select__content {
+		display: none;
+	}
+	:hover .select__content {
+		display: block;
+	}
+
+  > label {
+    display: inline-block;
+    width: 100px;
+    font-weight: bold;
+    vertical-align: top;
+    font-size: 1rem;
+    line-height: 28px;
+
+    &::after {
+      content: ":";
+    }
+  }
+}
+select,
+details {
+  display: inline-block;
+  width: 250px;
+  background-color: $white;
+  cursor: pointer;
+}
+
+select,
+summary {
+	border: 1px solid $lightgrey;
+  border-collapse: collapse;
+  border-radius: 4px;
+  padding: 4px;
+  width: 250px;
+  background-color: $white;
+  cursor: pointer;
+}
+
+details[open] {
+	position: absolute;
+	z-index: 2;
+}
+
+select:focus,
+summary:focus,
+summary:active {
+  box-shadow: 0 0 5px 1px $blue;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  margin-top: 2px;
+  border: 1px solid grey;
+  box-shadow: 0 0 5px 1px $darkgrey;
+}
+
+li {
+  margin: 2px;
+
+  > label {
+    cursor: pointer;
+    display: inline-block;
+    width: 100%;
+
+    &:hover {
+      background-color: $darkgrey;
+      color: red;
+    }
+
+    &:has(input:checked) {
+      background-color: $darkgrey;
+    }
+  }
 }
