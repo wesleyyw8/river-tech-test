@@ -106,6 +106,11 @@ export class GamesComponent implements OnDestroy, OnInit {
 				if (searchTerm) {
 					this.searchField.setValue(searchTerm);
 				}
+				const providers = params['provider'];
+				if (providers) {
+					this.checkedProviders = providers.split(',');
+					//setar os checkboxes checkados
+				}
 			});
 
 		this.checkboxChange$

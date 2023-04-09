@@ -21,6 +21,7 @@
                   name="provider" 
                   [value]="provider"
                   (change)="onCheckboxChange($event, provider)"
+                  [checked]="checkedProviders.includes(provider)"
                   />{{provider}}
 								</label>
 							</li>
