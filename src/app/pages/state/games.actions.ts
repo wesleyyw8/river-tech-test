@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
-import { Game } from 'src/app/shared';
+
+import { GameInterface } from '../models/game.interface';
 
 const entity = '[Games]';
 
@@ -10,7 +11,7 @@ export class LoadGames {
 
 export class LoadGamesSuccess {
 	static readonly type = `${entity} Load Success`;
-	constructor(public payload: Game[]) {}
+	constructor(public payload: GameInterface[]) {}
 }
 
 export class ShowLoader {

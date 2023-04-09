@@ -7,12 +7,13 @@ import {
 } from '@angular/core';
 import { Select, Store } from '@ngxs/store';
 import { Observable, Subject } from 'rxjs';
-import { Game } from 'src/app/shared';
 import { selectDistinctProviders, selectGames } from '../state/games.selectors';
 import { delay, take, takeUntil } from 'rxjs/operators';
 import { LoadGames } from '../state/games.actions';
 import { FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { GameInterface } from '../models/game.interface';
+import { Game } from '../models/game.model';
 
 const NAME_KEBAB = 'app-games';
 
@@ -31,7 +32,7 @@ export class GamesComponent implements OnDestroy, OnInit {
 	public games: Game[] = [];
 	public providerData: string[] = [];
 
-	@Select(selectGames) games$!: Observable<Game[]>;
+	@Select(selectGames) games$!: Observable<GameInterface[]>;
 	@Select(selectDistinctProviders) distinctProviders$!: Observable<string[]>;
 
 	public searchField: FormControl = new FormControl();
@@ -117,7 +118,10 @@ export class GamesComponent implements OnDestroy, OnInit {
 	private subscribeToGames(): void {
 		this.games$.pipe(takeUntil(this.destroy$)).subscribe((games) => {
 			if (games.length > 0) {
-				this.gamesData = games;
+				this.gamesData = [];
+				games.forEach((game: GameInterface) => {
+					this.gamesData.push(new Game(game));
+				});
 				this.filterGames(this.searchField.value, this.checkedProviders);
 			}
 		});
@@ -146,7 +150,7 @@ export class GamesComponent implements OnDestroy, OnInit {
 	}
 
 	private filterGames(searchTerm: string, selectedProviders: string[]): void {
-		this.games = this.gamesData.filter((game: Game) => {
+		this.games = this.gamesData.filter((game: GameInterface) => {
 			const isSearchTermMatching =
 				!searchTerm ||
 				game.title.toLowerCase().includes(searchTerm.toLowerCase());

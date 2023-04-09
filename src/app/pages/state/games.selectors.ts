@@ -1,7 +1,7 @@
 import { createSelector } from '@ngxs/store';
 import { GamesState, GamesStateModel } from './games.state';
-import { Game } from 'src/app/shared';
-import { GameTags } from './../../shared/index';
+import { GameInterface } from '../models/game.interface';
+import { GameTags } from '../models/enums';
 
 export class GamesSelectors {
 	static getGames(state: GamesStateModel) {
@@ -18,7 +18,7 @@ export const selectTrendingGames = createSelector(
 	[GamesState],
 	(state: GamesStateModel) =>
 		GamesSelectors.getGames(state).filter(
-			(game: Game) => game.tag === GameTags.TRENDING
+			(game: GameInterface) => game.tag === GameTags.TRENDING
 		)
 );
 
@@ -27,7 +27,9 @@ export const selectDistinctProviders = createSelector(
 	(state: GamesStateModel) => {
 		const distinctProviders = Array.from(
 			new Set(
-				GamesSelectors.getGames(state).map((game: Game) => game.providerName)
+				GamesSelectors.getGames(state).map(
+					(game: GameInterface) => game.providerName
+				)
 			)
 		);
 		return distinctProviders;

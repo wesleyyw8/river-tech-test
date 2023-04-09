@@ -1,9 +1,9 @@
 import { State, Action, StateContext } from '@ngxs/store';
 import { LoadGamesSuccess } from './games.actions';
-import { Game } from 'src/app/shared';
+import { GameInterface } from '../models/game.interface';
 
 export interface GamesStateModel {
-	games: Game[];
+	games: GameInterface[];
 	isLoading: boolean;
 }
 

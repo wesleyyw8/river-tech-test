@@ -11,8 +11,10 @@ import { takeUntil } from 'rxjs/operators';
 import { Select, Store } from '@ngxs/store';
 
 import { selectGames, selectTrendingGames } from './../state/games.selectors';
-import { Game } from '../../shared';
+
 import { LoadGames } from '../state/games.actions';
+import { GameInterface } from '../models/game.interface';
+import { Game } from '../models/game.model';
 
 const NAME_KEBAB = 'app-home';
 
@@ -27,7 +29,7 @@ export class HomeComponent implements OnDestroy, OnInit {
 	private ngUnsubscribe = new Subject<void>();
 	public gamesData: Game[] = [];
 
-	@Select(selectTrendingGames) games$!: Observable<Game[]>;
+	@Select(selectTrendingGames) games$!: Observable<GameInterface[]>;
 
 	constructor(
 		private changeDetector: ChangeDetectorRef,
@@ -37,7 +39,10 @@ export class HomeComponent implements OnDestroy, OnInit {
 		this.store.dispatch(new LoadGames());
 
 		this.games$.pipe(takeUntil(this.ngUnsubscribe)).subscribe((games) => {
-			this.gamesData = games;
+			this.gamesData = [];
+			games.forEach((game: GameInterface) => {
+				this.gamesData.push(new Game(game));
+			});
 			this.changeDetector.markForCheck();
 		});
 	}
