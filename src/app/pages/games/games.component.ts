@@ -1,20 +1,15 @@
-/* eslint-disable no-unused-vars */
 import {
-	AfterViewInit,
 	ChangeDetectionStrategy,
 	ChangeDetectorRef,
 	Component,
-	ElementRef,
 	OnDestroy,
-	OnInit,
-	QueryList,
-	ViewChildren
+	OnInit
 } from '@angular/core';
 import { Select, Store } from '@ngxs/store';
-import { Observable, Subject, fromEvent, merge } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { Game } from 'src/app/shared';
 import { selectDistinctProviders, selectGames } from '../state/games.selectors';
-import { delay, first, take, takeUntil } from 'rxjs/operators';
+import { delay, take, takeUntil } from 'rxjs/operators';
 import { LoadGames } from '../state/games.actions';
 import { FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -33,6 +28,7 @@ export class GamesComponent implements OnDestroy, OnInit {
 	private destroy$ = new Subject<void>();
 
 	public gamesData: Game[] = [];
+	public games: Game[] = [];
 	public providerData: string[] = [];
 
 	@Select(selectGames) games$!: Observable<Game[]>;
@@ -41,13 +37,16 @@ export class GamesComponent implements OnDestroy, OnInit {
 	public searchField: FormControl = new FormControl();
 
 	public checkedProviders: string[] = [];
-	public checkboxChangeSubject = new Subject<string[]>();
-	public checkboxChange$ = this.checkboxChangeSubject.asObservable();
+	public checkboxChangeSubject$ = new Subject<string[]>();
 
 	constructor(
+		// eslint-disable-next-line no-unused-vars
 		private changeDetector: ChangeDetectorRef,
+		// eslint-disable-next-line no-unused-vars
 		private store: Store,
+		// eslint-disable-next-line no-unused-vars
 		private router: Router,
+		// eslint-disable-next-line no-unused-vars
 		private activatedRoute: ActivatedRoute
 	) {}
 
@@ -60,7 +59,7 @@ export class GamesComponent implements OnDestroy, OnInit {
 				(p) => p !== provider
 			);
 		}
-		this.checkboxChangeSubject.next(this.checkedProviders);
+		this.checkboxChangeSubject$.next(this.checkedProviders);
 	}
 
 	ngOnDestroy(): void {
@@ -70,59 +69,94 @@ export class GamesComponent implements OnDestroy, OnInit {
 
 	ngOnInit(): void {
 		this.store.dispatch(new LoadGames());
+		this.subscribeToDistinctProviders();
+		this.subscribeToSearchField();
+		this.subscribeToQueryParams();
+		this.subscribeToCheckboxChange();
+		this.subscribeToGames();
+	}
 
-		this.games$.pipe(takeUntil(this.destroy$)).subscribe((games) => {
-			this.gamesData = games;
-			this.changeDetector.markForCheck();
-		});
-
-		this.games$.pipe(takeUntil(this.destroy$)).subscribe((games) => {
-			this.gamesData = games;
-			this.changeDetector.markForCheck();
-		});
-
+	private subscribeToDistinctProviders(): void {
 		this.distinctProviders$
 			.pipe(takeUntil(this.destroy$))
 			.subscribe((providers: string[]) => {
 				this.providerData = providers;
 			});
+	}
 
+	private subscribeToSearchField(): void {
 		this.searchField.valueChanges
 			.pipe(takeUntil(this.destroy$), delay(500))
 			.subscribe((value: string) => {
-				this.router.navigate([], {
-					relativeTo: this.activatedRoute,
-					queryParams: {
-						searchTerm: value
-					},
-					queryParamsHandling: 'merge'
-				});
+				this.updateSearchTerm(value);
 			});
+	}
 
-		this.activatedRoute.queryParams
-			.pipe(take(1)) //it will complete the subscription so no need to unsubscribe.
-			.subscribe((params) => {
-				const searchTerm = params['searchTerm'];
-				if (searchTerm) {
-					this.searchField.setValue(searchTerm);
-				}
-				const providers = params['provider'];
-				if (providers) {
-					this.checkedProviders = providers.split(',');
-					//setar os checkboxes checkados
-				}
-			});
+	private subscribeToQueryParams(): void {
+		this.activatedRoute.queryParams.pipe(take(1)).subscribe((params) => {
+			const searchTerm = params['searchTerm'];
+			if (searchTerm) {
+				this.searchField.setValue(searchTerm);
+			}
+			const providers = params['provider'];
+			if (providers) {
+				this.checkedProviders = providers.split(',');
+			}
+			this.filterGames(this.searchField.value, this.checkedProviders);
+		});
+	}
 
-		this.checkboxChange$
+	private subscribeToCheckboxChange(): void {
+		this.checkboxChangeSubject$
 			.pipe(takeUntil(this.destroy$))
 			.subscribe((checkedProviders) => {
-				this.router.navigate([], {
-					relativeTo: this.activatedRoute,
-					queryParams: {
-						provider: checkedProviders.join(',')
-					},
-					queryParamsHandling: 'merge'
-				});
+				this.updateSelectedProviders(checkedProviders);
 			});
+	}
+
+	private subscribeToGames(): void {
+		this.games$.pipe(takeUntil(this.destroy$)).subscribe((games) => {
+			if (games.length > 0) {
+				this.gamesData = games;
+				this.filterGames(this.searchField.value, this.checkedProviders);
+			}
+		});
+	}
+
+	private updateSearchTerm(searchTerm: string): void {
+		this.router.navigate([], {
+			relativeTo: this.activatedRoute,
+			queryParams: {
+				searchTerm: searchTerm
+			},
+			queryParamsHandling: 'merge'
+		});
+		this.filterGames(this.searchField.value, this.checkedProviders);
+	}
+
+	private updateSelectedProviders(checkedProviders: string[]): void {
+		this.router.navigate([], {
+			relativeTo: this.activatedRoute,
+			queryParams: {
+				provider: checkedProviders.join(',')
+			},
+			queryParamsHandling: 'merge'
+		});
+		this.filterGames(this.searchField.value, this.checkedProviders);
+	}
+
+	private filterGames(searchTerm: string, selectedProviders: string[]): void {
+		this.games = this.gamesData.filter((game: Game) => {
+			const isSearchTermMatching =
+				!searchTerm ||
+				game.title.toLowerCase().includes(searchTerm.toLowerCase());
+			const isProviderMatching =
+				!selectedProviders.length ||
+				selectedProviders.includes(game.providerName);
+
+			return isSearchTermMatching && isProviderMatching;
+		});
+
+		this.changeDetector.markForCheck();
 	}
 }
