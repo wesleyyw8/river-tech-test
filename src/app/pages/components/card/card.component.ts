@@ -12,7 +12,7 @@ export class CardComponent {
 	// eslint-disable-next-line no-unused-vars
 	constructor(private router: Router) {}
 
-	public goToGameDetails(id: string): void {
-		this.router.navigate(['/games/detail', id]);
+	public goToGameDetails(slug: string): void {
+		this.router.navigate(['/games/detail', slug]);
 	}
 }

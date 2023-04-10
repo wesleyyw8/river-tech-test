@@ -12,7 +12,7 @@ const ROUTES: Routes = [
 		component: GamesComponent
 	},
 	{
-		path: 'games/detail/:id',
+		path: 'games/detail/:slug',
 		component: GameDetailComponent
 	}
 ];

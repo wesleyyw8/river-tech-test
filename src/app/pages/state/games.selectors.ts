@@ -36,9 +36,9 @@ export const selectDistinctProviders = createSelector(
 	}
 );
 
-export const selectGameById = createSelector(
+export const selectGameBySlug = createSelector(
 	[selectGames],
-	(games: GameInterface[], id: string) => {
-		return games.find((game) => game.id === id);
+	(games: GameInterface[], slug: string) => {
+		return games.find((game) => game.slug === slug);
 	}
 );

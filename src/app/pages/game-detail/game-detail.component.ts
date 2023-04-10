@@ -6,7 +6,7 @@ import {
 	OnInit
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { selectGameById, selectGames } from '../state/games.selectors';
+import { selectGameBySlug, selectGames } from '../state/games.selectors';
 import { Subject } from 'rxjs';
 import { Game } from '../models/game.model';
 import { Store } from '@ngxs/store';
@@ -48,9 +48,9 @@ export class GameDetailComponent implements OnInit, OnDestroy {
 			.pipe(
 				// eslint-disable-next-line no-unused-vars
 				switchMap(([games, params]) => {
-					const gameId = params['id']; // The '+' sign is used to convert the string to a number.
+					const gameSlug = params['slug']; // The '+' sign is used to convert the string to a number.
 					return this.store.select((state) =>
-						selectGameById(state.gamesState.games, gameId)
+						selectGameBySlug(state.gamesState.games, gameSlug)
 					);
 				}),
 				takeUntil(this.ngUnsubscribe)
