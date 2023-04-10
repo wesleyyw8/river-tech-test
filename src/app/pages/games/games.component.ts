@@ -51,7 +51,7 @@ export class GamesComponent implements OnDestroy, OnInit {
 		private activatedRoute: ActivatedRoute
 	) {}
 
-	onCheckboxChange(event: Event, provider: string): void {
+	public onCheckboxChange(event: Event, provider: string): void {
 		const checkbox = event.target as HTMLInputElement;
 		if (checkbox.checked) {
 			this.checkedProviders.push(provider);
@@ -60,6 +60,11 @@ export class GamesComponent implements OnDestroy, OnInit {
 				(p) => p !== provider
 			);
 		}
+		this.checkboxChangeSubject$.next(this.checkedProviders);
+	}
+
+	public clearSelectedProviders(): void {
+		this.checkedProviders = [];
 		this.checkboxChangeSubject$.next(this.checkedProviders);
 	}
 

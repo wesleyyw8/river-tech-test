@@ -12,7 +12,7 @@
   <div class="app-games__search-container">
     <div class="select-container">
 			<details>
-					<summary>Choose a Provider</summary>
+					<summary>Choose a Provider <button (click)="clearSelectedProviders()">Clear</button></summary>
 					<ul class="select__content">
 							<li *ngFor="let provider of providerData">
 								<label>

@@ -65,6 +65,7 @@ export class GameDetailComponent implements OnInit, OnDestroy {
 	}
 
 	ngOnDestroy(): void {
+		this.ngUnsubscribe.next();
 		this.ngUnsubscribe.complete();
 	}
 }

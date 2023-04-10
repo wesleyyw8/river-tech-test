@@ -19,7 +19,7 @@ Create a mini casino website which contains;
     - [x]	* The URL should contain the `search term` as a query param
     - [x]* Drop down filter by provider
       - [x]	* Dropdown should be a multi-select, user must be able to select multiple providers
-      - [ ]	* User should have an option to clear all selected providers
+      - [x]	* User should have an option to clear all selected providers
       - [x]	* Clicking an already selected provider deselects it
       - [x]	* When selecting/deselecting a provider from the list it should be reflected inside the url
       - [x]	* Provider list should be updated depending on the searched results only
