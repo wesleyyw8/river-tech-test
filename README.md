@@ -12,33 +12,33 @@ Create a mini casino website which contains;
 * Side menu
   	* Links to `home` and `games`
 * Games page
-  	* List of all games
-  	* Search
-    	* When the user types inside the search field the games list should update in real time with the results
-    	* There should be a 500ms delay between the user typing and updating of results
-    	* The URL should contain the `search term` as a query param
-    * Drop down filter by provider
-      	* Dropdown should be a multi-select, user must be able to select multiple providers
-      	* User should have an option to clear all selected providers
-      	* Clicking an already selected provider deselects it
-      	* When selecting/deselecting a provider from the list it should be reflected inside the url
-      	* Provider list should be updated depending on the searched results only
-    * Search and providers filtering should work in conjunction e.g. `http://localhost:4200/games?searchTerm=book&provider=Kalamba%20Games`
-        * Refreshing should keep the user's filter / search 
-        * Clearing the search should not clear the game provider filter and vice versa
+  - [x] * List of all games
+  - [x]	* Search
+    - [x]	* When the user types inside the search field the games list should update in real time with the results
+    - [x]	* There should be a 500ms delay between the user typing and updating of results
+    - [x]	* The URL should contain the `search term` as a query param
+    - [x]* Drop down filter by provider
+      - [x]	* Dropdown should be a multi-select, user must be able to select multiple providers
+      - [ ]	* User should have an option to clear all selected providers
+      - [x]	* Clicking an already selected provider deselects it
+      - [x]	* When selecting/deselecting a provider from the list it should be reflected inside the url
+      - [x]	* Provider list should be updated depending on the searched results only
+    - [x] * Search and providers filtering should work in conjunction e.g. `http://localhost:4200/games?searchTerm=book&provider=Kalamba%20Games`
+      - [x]  * Refreshing should keep the user's filter / search 
+      - [x]  * Clearing the search should not clear the game provider filter and vice versa
 * Game page
-  	* Contains the thumb and a `Play for Fun` button which redirects to the game by using the `startUrl`
-  	* Use the `Game.slug` for the `URL` param
+  - [x]	* Contains the thumb and a `Play for Fun` button which redirects to the game by using the `startUrl`
+  - [x]	* Use the `Game.slug` for the `URL` param
 * Last Played Games
-  	* At the bottom for all pages, have a section called `Last Played`
-  	* Game is considered as `Last Played` when the user has navigated to the Game Page
-  	* Only Show the 5 most recent games
-  	* Should not contain duplicate games
-  	* Should be ordered by last played first
-  	* Should be persisted even after the user refreshes the browser
+  - [ ]	* At the bottom for all pages, have a section called `Last Played`
+  - [ ]	* Game is considered as `Last Played` when the user has navigated to the Game Page
+  - [ ]	* Only Show the 5 most recent games
+  - [ ]	* Should not contain duplicate games
+  - [ ]	* Should be ordered by last played first
+  - [ ]	* Should be persisted even after the user refreshes the browser
 * Linting
-  * Fix build issue 
-  * Project should pass all lint rules
+- [x]  * Fix build issue 
+- [x]  * Project should pass all lint rules
 
 ### Technical Details
 
