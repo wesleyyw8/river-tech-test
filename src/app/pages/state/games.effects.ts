@@ -33,7 +33,7 @@ export class GamesEffects {
 				})
 			)
 			.subscribe({
-				complete: () => {
+				next: () => {
 					this.store.dispatch(new HideLoader());
 				}
 			});
