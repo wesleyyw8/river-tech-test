@@ -23,3 +23,8 @@ export class HideLoader {
 	static readonly type = `${entity} Hide Loader`;
 	constructor() {}
 }
+
+export class AddLastPlayed {
+	static readonly type = `${entity} Add Last Played`;
+	constructor(public payload: GameInterface['slug']) {}
+}

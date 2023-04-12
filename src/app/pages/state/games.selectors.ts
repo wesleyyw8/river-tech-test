@@ -7,7 +7,15 @@ export class GamesSelectors {
 	static getGames(state: GamesStateModel) {
 		return state.games;
 	}
+	static getLastPlayedGames(state: GamesStateModel) {
+		return state.lastPlayedGames;
+	}
 }
+
+export const selectLastPlayedGames = createSelector(
+	[GamesState],
+	(state: GamesStateModel) => GamesSelectors.getLastPlayedGames(state)
+);
 
 export const selectGames = createSelector(
 	[GamesState],
@@ -39,6 +47,16 @@ export const selectDistinctProviders = createSelector(
 export const selectGameBySlug = createSelector(
 	[selectGames],
 	(games: GameInterface[], slug: string) => {
+		if (!games) {
+			return null;
+		}
 		return games.find((game) => game.slug === slug);
+	}
+);
+
+export const getLastedGames = createSelector(
+	[selectLastPlayedGames],
+	(lastPlayedGames: string[]) => {
+		return lastPlayedGames;
 	}
 );

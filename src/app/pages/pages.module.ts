@@ -8,10 +8,16 @@ import { NgxsEffectsModule } from 'ngxs-effects';
 import { GamesEffects } from './state/games.effects';
 import { GamesComponent } from './games/games.component';
 import { CardComponent } from './components/card/card.component';
-import {  FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { GameDetailComponent } from './game-detail/game-detail.component';
+import { LastPlayedComponent } from './last-played/last-played.component';
 
-const COMPONENTS = [HomeComponent, GamesComponent, CardComponent];
+const COMPONENTS = [
+	HomeComponent,
+	GamesComponent,
+	CardComponent,
+	LastPlayedComponent
+];
 
 @NgModule({
 	imports: [
@@ -22,7 +28,7 @@ const COMPONENTS = [HomeComponent, GamesComponent, CardComponent];
 		ReactiveFormsModule,
 		FormsModule
 	],
-	declarations: [...COMPONENTS, GameDetailComponent],
+	declarations: [...COMPONENTS, GameDetailComponent, LastPlayedComponent],
 	exports: [...COMPONENTS]
 })
 export class AppPagesModule {}

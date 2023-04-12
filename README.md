@@ -30,12 +30,12 @@ Create a mini casino website which contains;
   - [x]	* Contains the thumb and a `Play for Fun` button which redirects to the game by using the `startUrl`
   - [x]	* Use the `Game.slug` for the `URL` param
 * Last Played Games
-  - [ ]	* At the bottom for all pages, have a section called `Last Played`
-  - [ ]	* Game is considered as `Last Played` when the user has navigated to the Game Page
-  - [ ]	* Only Show the 5 most recent games
-  - [ ]	* Should not contain duplicate games
-  - [ ]	* Should be ordered by last played first
-  - [ ]	* Should be persisted even after the user refreshes the browser
+  - [x]	* At the bottom for all pages, have a section called `Last Played`
+  - [x]	* Game is considered as `Last Played` when the user has navigated to the Game Page
+  - [x]	* Only Show the 5 most recent games
+  - [x]	* Should not contain duplicate games
+  - [x]	* Should be ordered by last played first
+  - [x]	* Should be persisted even after the user refreshes the browser
 * Linting
 - [x]  * Fix build issue 
 - [x]  * Project should pass all lint rules
