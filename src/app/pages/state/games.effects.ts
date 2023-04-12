@@ -1,5 +1,3 @@
-/* eslint-disable no-unused-vars */
-// games.effects.ts
 import { Injectable } from '@angular/core';
 import { Actions, Store, ofActionDispatched } from '@ngxs/store';
 import {
@@ -8,7 +6,7 @@ import {
 	HideLoader,
 	LoadGamesSuccess
 } from './games.actions';
-import { catchError, map, switchMap, tap } from 'rxjs/operators';
+import { catchError, map, switchMap } from 'rxjs/operators';
 
 import { throwError } from 'rxjs';
 import { GameMockClient } from '../service/game-mock.client';
@@ -16,8 +14,11 @@ import { GameMockClient } from '../service/game-mock.client';
 @Injectable()
 export class GamesEffects {
 	constructor(
+		// eslint-disable-next-line no-unused-vars
 		private actions$: Actions,
+		// eslint-disable-next-line no-unused-vars
 		private gameService: GameMockClient,
+		// eslint-disable-next-line no-unused-vars
 		private store: Store
 	) {
 		this.actions$
@@ -32,7 +33,9 @@ export class GamesEffects {
 				})
 			)
 			.subscribe({
-				complete: () => this.store.dispatch(new HideLoader())
+				complete: () => {
+					this.store.dispatch(new HideLoader());
+				}
 			});
 	}
 }

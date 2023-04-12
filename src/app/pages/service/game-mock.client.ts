@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -9,6 +8,7 @@ import { shareReplay } from 'rxjs/operators';
 export class GameMockClient {
 	private readonly dataURL = 'assets/game.mock-data.json';
 
+	// eslint-disable-next-line no-unused-vars
 	constructor(private http: HttpClient) {
 		this._games$ = this.http
 			.get<GameInterface[]>(this.dataURL)

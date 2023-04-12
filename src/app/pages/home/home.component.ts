@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import {
 	Component,
 	ChangeDetectionStrategy,
@@ -11,7 +10,6 @@ import { takeUntil } from 'rxjs/operators';
 import { Select, Store } from '@ngxs/store';
 
 import {
-	selectGames,
 	selectIsLoading,
 	selectTrendingGames
 } from './../state/games.selectors';
@@ -38,7 +36,9 @@ export class HomeComponent implements OnDestroy, OnInit {
 	@Select(selectIsLoading) isLoading$!: Observable<boolean>;
 
 	constructor(
+		// eslint-disable-next-line no-unused-vars
 		private changeDetector: ChangeDetectorRef,
+		// eslint-disable-next-line no-unused-vars
 		private store: Store
 	) {}
 	ngOnInit(): void {
