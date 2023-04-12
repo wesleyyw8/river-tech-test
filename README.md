@@ -31,12 +31,12 @@ Create a mini casino website which contains;
       - [x]	* User should have an option to clear all selected providers  
       **I have a simple button for that**  
       - [x]	* Clicking an already selected provider deselects it  
-      **The native <select multiple> was very buggy for this one so I used a div with checkboxes to achieve it**
+      **The native select multiple tag was very buggy for this one so I used a div with checkboxes to achieve it**
       - [x]	* When selecting/deselecting a provider from the list it should be reflected inside the url  
       **I could handle it in the selector side but I'd decided to do it in the component side. there is a function on the games.component that handles it called filterGames**  
       - [ ]	* Provider list should be updated depending on the searched results only
     - [x] * Search and providers filtering should work in conjunction e.g. `http://localhost:4200/games?searchTerm=book&provider=Kalamba%20Games`
-      **I have a updateSearchTerm function on the games component to update the querystring parameter whenever the user selects a provider from the dropdownlist or type something on the search text**  
+      **I have a updateSearchTerm function on the games component to update the querystring parameter whenever the user selects a provider from the dropdownlist or type something on the search text**
       - [x]  * Refreshing should keep the user's filter / search  
       **Yes, the querystring parameters will handle that!**  
       - [x]  * Clearing the search should not clear the game provider filter and vice versa
