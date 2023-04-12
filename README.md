@@ -31,7 +31,7 @@ Create a mini casino website which contains;
       - [x]	* User should have an option to clear all selected providers  
       **I have a simple button for that**  
       - [x]	* Clicking an already selected provider deselects it  
-      **The native <select multiple> was very buggy for this one so I used a div with checkboxes to achieve it**  
+      **The native <select multiple> was very buggy for this one so I used a div with checkboxes to achieve it**
       - [x]	* When selecting/deselecting a provider from the list it should be reflected inside the url  
       **I could handle it in the selector side but I'd decided to do it in the component side. there is a function on the games.component that handles it called filterGames**  
       - [ ]	* Provider list should be updated depending on the searched results only
