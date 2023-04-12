@@ -11,6 +11,7 @@ import { CardComponent } from './components/card/card.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { GameDetailComponent } from './game-detail/game-detail.component';
 import { LastPlayedComponent } from './last-played/last-played.component';
+import { GameMockClient } from './service/game-mock.client';
 
 const COMPONENTS = [
 	HomeComponent,
@@ -29,6 +30,7 @@ const COMPONENTS = [
 		FormsModule
 	],
 	declarations: [...COMPONENTS, GameDetailComponent, LastPlayedComponent],
-	exports: [...COMPONENTS]
+	exports: [...COMPONENTS],
+	providers: [GameMockClient]
 })
 export class AppPagesModule {}

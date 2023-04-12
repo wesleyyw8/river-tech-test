@@ -9,8 +9,9 @@ import {
 	LoadGamesSuccess
 } from './games.actions';
 import { catchError, map, switchMap, tap } from 'rxjs/operators';
-import { GameMockClient } from 'src/app/shared';
+
 import { throwError } from 'rxjs';
+import { GameMockClient } from '../service/game-mock.client';
 
 @Injectable()
 export class GamesEffects {
