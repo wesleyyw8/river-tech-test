@@ -75,7 +75,7 @@ Create a mini casino website which contains;
 ### Rating
 
 * You may create the solution however you want, these are key things we will look for;
-  * All requirements are met
+  * All requirements are met  
   **done**
   * Best practices  
   **I removed the shared module and integrated its components and services directly into the pages module since all three pages of the application require the same functionality. Furthermore, I reorganized the project structure by placing components that do not connect with the store into the components folder and those that do connect with the store into the containers folder**
@@ -92,43 +92,3 @@ Create a mini casino website which contains;
   * Polished Design
   * SCSS usage  
   **there is plenty of it**  
-
-## Development
-
-### Development server
-
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
-
-### Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-### Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-### Lint
-
-Run `npm run lint` to lint the project. This will lint both `ts` and `scss` files.
-
-## Development
-
-### Development server
-
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
-
-### Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-### Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-### Lint
-
-Run `npm run lint` to lint the project. This will lint both `ts` and `scss` files.
-
-### Additional help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
