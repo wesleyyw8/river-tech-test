@@ -6,36 +6,58 @@
 
 Create a mini casino website which contains;
 
-* Do not use Angular's `async` pipe
+* Do not use Angular's `async` pipe  
+  Done. Additionally, I have ensured that you are now unsubscribed from all of them.  
 * Home page
-  	* Containing a list of all `trending` games
+  	* Containing a list of all `trending` games  
+    I created a selector for that. 
 * Side menu
-  	* Links to `home` and `games`
+  	* Links to `home` and `games`  
+    I would also like to assure you that API calls are being cached, meaning that if a user has already loaded the games on the home page, there is no need to call the API again. Similarly, the same applies to the games detail page.  
+    
 * Games page
-  - [x] * List of all games
+  - [x] * List of all games  
   - [x]	* Search
-    - [x]	* When the user types inside the search field the games list should update in real time with the results
-    - [x]	* There should be a 500ms delay between the user typing and updating of results
-    - [x]	* The URL should contain the `search term` as a query param
-    - [x]* Drop down filter by provider
+    - [x]	* When the user types inside the search field the games list should update in real time with the results  
+    I used a rxjs selector for that  
+    - [x]	* There should be a 500ms delay between the user typing and updating of results  
+    I used the rxjs/operators delay for this one  
+    - [x]	* The URL should contain the `search term` as a query param  
+    I handled that on the subscribeToQueryParams on the games components  
+    - [x] * Drop down filter by provider  
+    I have implemented a selector function named 'selectDistinctProviders' to ensure that the same providers are not displayed repeatedly on the dropdown list  
       - [x]	* Dropdown should be a multi-select, user must be able to select multiple providers
-      - [x]	* User should have an option to clear all selected providers
-      - [x]	* Clicking an already selected provider deselects it
-      - [x]	* When selecting/deselecting a provider from the list it should be reflected inside the url
-      - [x]	* Provider list should be updated depending on the searched results only
+To achieve this, I have utilized the <details></details> HTML tag and included additional CSS to ensure that the div is hidden when the mouse is not hovering over it    
+      - [x]	* User should have an option to clear all selected providers  
+      I have a simple button for that  
+      - [x]	* Clicking an already selected provider deselects it  
+      The native <select multiple> was very buggy for this one so I used a div with checkboxes to achieve it  
+      - [x]	* When selecting/deselecting a provider from the list it should be reflected inside the url  
+      I could handle it in the selector side but I'd decided to do it in the component side. there is a function on the games.component that handles it called filterGames  
+      - [ ]	* Provider list should be updated depending on the searched results only
     - [x] * Search and providers filtering should work in conjunction e.g. `http://localhost:4200/games?searchTerm=book&provider=Kalamba%20Games`
-      - [x]  * Refreshing should keep the user's filter / search 
+      I have a updateSearchTerm function on the games component to update the querystring parameter whenever the user selects a provider from the dropdownlist or type something on the search text
+      - [x]  * Refreshing should keep the user's filter / search  
+      Yes, the querystring parameters will handle that!  
       - [x]  * Clearing the search should not clear the game provider filter and vice versa
 * Game page
+  One has nothing to do with the other !   
   - [x]	* Contains the thumb and a `Play for Fun` button which redirects to the game by using the `startUrl`
-  - [x]	* Use the `Game.slug` for the `URL` param
+  To improve the overall aesthetics of the pages, I have incorporated a thumb in all of them. Additionally, I have utilized the <ng-content> feature to add the 'play for fun' button only when the component is used on the details page. This means that all three pages now use the same card component
+  - [x]	* Use the `Game.slug` for the `URL` param  
+  I could also used the ID. but since the list says to use the slug I did it using the slug.  
 * Last Played Games
-  - [x]	* At the bottom for all pages, have a section called `Last Played`
+  - [x]	* At the bottom for all pages, have a section called `Last Played`  
+  Done with the lastPlayedComponent
   - [x]	* Game is considered as `Last Played` when the user has navigated to the Game Page
-  - [x]	* Only Show the 5 most recent games
-  - [x]	* Should not contain duplicate games
+  - [x]	* Only Show the 5 most recent games  
+  Done with a selector for that
+  - [x]	* Should not contain duplicate games  
+  It is handled in the reducer side  
   - [x]	* Should be ordered by last played first
-  - [x]	* Should be persisted even after the user refreshes the browser
+  The last played will be on the left  
+  - [x]	* Should be persisted even after the user refreshes the browser  
+    I have implemented the use of local storage for this feature. Although session storage could have been used, I chose to use local storage to ensure that the latest search results are saved even if the user closes their browser  
 * Linting
 - [x]  * Fix build issue 
 - [x]  * Project should pass all lint rules
