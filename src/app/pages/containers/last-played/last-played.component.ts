@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 import { Select, Store } from '@ngxs/store';
 import { Observable, Subject } from 'rxjs';
-import { selectLastedGames } from '../state/games.selectors';
+import { selectLastedGames } from '../../state/games.selectors';
 import { takeUntil } from 'rxjs/operators';
 
 @Component({

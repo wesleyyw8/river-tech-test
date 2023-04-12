@@ -6,13 +6,13 @@ import {
 	OnInit
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { selectGameBySlug, selectIsLoading } from '../state/games.selectors';
+import { selectGameBySlug, selectIsLoading } from '../../state/games.selectors';
 import { Observable, Subject } from 'rxjs';
-import { Game } from '../models/game.model';
+import { Game } from '../../models/game.model';
 import { Select, Store } from '@ngxs/store';
-import { LoadGames, AddLastPlayed } from '../state/games.actions';
+import { LoadGames, AddLastPlayed } from '../../state/games.actions';
 import { takeUntil } from 'rxjs/operators';
-import { GameInterface } from '../models/game.interface';
+import { GameInterface } from '../../models/game.interface';
 
 @Component({
 	selector: 'app-game-detail',

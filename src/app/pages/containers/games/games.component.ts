@@ -11,13 +11,13 @@ import {
 	selectDistinctProviders,
 	selectGames,
 	selectIsLoading
-} from '../state/games.selectors';
+} from '../../state/games.selectors';
 import { delay, take, takeUntil } from 'rxjs/operators';
-import { LoadGames } from '../state/games.actions';
+import { LoadGames } from '../../state/games.actions';
 import { FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { GameInterface } from '../models/game.interface';
-import { Game } from '../models/game.model';
+import { GameInterface } from '../../models/game.interface';
+import { Game } from '../../models/game.model';
 
 const NAME_KEBAB = 'app-games';
 

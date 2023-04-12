@@ -12,11 +12,11 @@ import { Select, Store } from '@ngxs/store';
 import {
 	selectIsLoading,
 	selectTrendingGames
-} from './../state/games.selectors';
+} from './../../state/games.selectors';
 
-import { LoadGames } from '../state/games.actions';
-import { GameInterface } from '../models/game.interface';
-import { Game } from '../models/game.model';
+import { LoadGames } from '../../state/games.actions';
+import { GameInterface } from '../../models/game.interface';
+import { Game } from '../../models/game.model';
 
 const NAME_KEBAB = 'app-home';
 

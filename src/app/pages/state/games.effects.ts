@@ -9,7 +9,7 @@ import {
 import { catchError, map, switchMap } from 'rxjs/operators';
 
 import { throwError } from 'rxjs';
-import { GameMockClient } from '../service/game-mock.client';
+import { GameMockClient } from '../services/game-mock.client';
 
 @Injectable()
 export class GamesEffects {

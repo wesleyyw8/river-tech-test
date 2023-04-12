@@ -60,7 +60,7 @@ export const selectGameBySlug = createSelector(
 export const selectLastedGames = createSelector(
 	[selectLastPlayedGames],
 	(lastPlayedGames: string[]) => {
-		return lastPlayedGames;
+		return lastPlayedGames.reverse();
 	}
 );
 
