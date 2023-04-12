@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 import { Select, Store } from '@ngxs/store';
 import { Observable, Subject } from 'rxjs';
-import { getLastedGames } from '../state/games.selectors';
+import { selectLastedGames } from '../state/games.selectors';
 import { takeUntil } from 'rxjs/operators';
 
 @Component({
@@ -19,7 +19,7 @@ import { takeUntil } from 'rxjs/operators';
 export class LastPlayedComponent implements OnDestroy, OnInit {
 	private ngUnsubscribe = new Subject<void>();
 
-	@Select(getLastedGames) lastPlayedGames$!: Observable<string[]>;
+	@Select(selectLastedGames) lastPlayedGames$!: Observable<string[]>;
 	public gamesList: string[] = [];
 
 	constructor(

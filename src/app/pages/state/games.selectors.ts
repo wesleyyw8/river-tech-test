@@ -10,6 +10,9 @@ export class GamesSelectors {
 	static getLastPlayedGames(state: GamesStateModel) {
 		return state.lastPlayedGames;
 	}
+	static getIsLoading(state: GamesStateModel) {
+		return state.isLoading;
+	}
 }
 
 export const selectLastPlayedGames = createSelector(
@@ -54,9 +57,14 @@ export const selectGameBySlug = createSelector(
 	}
 );
 
-export const getLastedGames = createSelector(
+export const selectLastedGames = createSelector(
 	[selectLastPlayedGames],
 	(lastPlayedGames: string[]) => {
 		return lastPlayedGames;
 	}
+);
+
+export const selectIsLoading = createSelector(
+	[GamesState],
+	(state: GamesStateModel) => GamesSelectors.getIsLoading(state)
 );

@@ -1,5 +1,10 @@
 import { State, Action, StateContext } from '@ngxs/store';
-import { LoadGamesSuccess, AddLastPlayed } from './games.actions';
+import {
+	LoadGamesSuccess,
+	AddLastPlayed,
+	ShowLoader,
+	HideLoader
+} from './games.actions';
 import { GameInterface } from '../models/game.interface';
 
 export interface GamesStateModel {
@@ -47,5 +52,23 @@ export class GamesState {
 		});
 		// eslint-disable-next-line no-undef
 		localStorage.setItem('lastPlayedGames', JSON.stringify(lastPlayedGames));
+	}
+
+	@Action(ShowLoader)
+	showLoader(ctx: StateContext<GamesStateModel>) {
+		const state = ctx.getState();
+		ctx.setState({
+			...state,
+			isLoading: true
+		});
+	}
+
+	@Action(HideLoader)
+	hideLoader(ctx: StateContext<GamesStateModel>) {
+		const state = ctx.getState();
+		ctx.setState({
+			...state,
+			isLoading: false
+		});
 	}
 }

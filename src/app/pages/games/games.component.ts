@@ -7,7 +7,11 @@ import {
 } from '@angular/core';
 import { Select, Store } from '@ngxs/store';
 import { Observable, Subject } from 'rxjs';
-import { selectDistinctProviders, selectGames } from '../state/games.selectors';
+import {
+	selectDistinctProviders,
+	selectGames,
+	selectIsLoading
+} from '../state/games.selectors';
 import { delay, take, takeUntil } from 'rxjs/operators';
 import { LoadGames } from '../state/games.actions';
 import { FormControl } from '@angular/forms';
@@ -31,9 +35,11 @@ export class GamesComponent implements OnDestroy, OnInit {
 	public gamesData: Game[] = [];
 	public games: Game[] = [];
 	public providerData: string[] = [];
+	public isLoading: boolean = false;
 
 	@Select(selectGames) games$!: Observable<GameInterface[]>;
 	@Select(selectDistinctProviders) distinctProviders$!: Observable<string[]>;
+	@Select(selectIsLoading) isLoading$!: Observable<boolean>;
 
 	public searchField: FormControl = new FormControl();
 
@@ -80,6 +86,16 @@ export class GamesComponent implements OnDestroy, OnInit {
 		this.subscribeToQueryParams();
 		this.subscribeToCheckboxChange();
 		this.subscribeToGames();
+		this.subscribeToLoader();
+	}
+
+	private subscribeToLoader(): void {
+		this.isLoading$
+			.pipe(takeUntil(this.destroy$))
+			.subscribe((isLoading: boolean) => {
+				this.isLoading = isLoading;
+				this.changeDetector.markForCheck();
+			});
 	}
 
 	private subscribeToDistinctProviders(): void {

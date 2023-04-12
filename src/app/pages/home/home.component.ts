@@ -10,7 +10,11 @@ import { ChangeDetectorRef } from '@angular/core';
 import { takeUntil } from 'rxjs/operators';
 import { Select, Store } from '@ngxs/store';
 
-import { selectGames, selectTrendingGames } from './../state/games.selectors';
+import {
+	selectGames,
+	selectIsLoading,
+	selectTrendingGames
+} from './../state/games.selectors';
 
 import { LoadGames } from '../state/games.actions';
 import { GameInterface } from '../models/game.interface';
@@ -28,8 +32,10 @@ const NAME_KEBAB = 'app-home';
 export class HomeComponent implements OnDestroy, OnInit {
 	private ngUnsubscribe = new Subject<void>();
 	public gamesData: Game[] = [];
+	public isLoading: boolean = false;
 
 	@Select(selectTrendingGames) games$!: Observable<GameInterface[]>;
+	@Select(selectIsLoading) isLoading$!: Observable<boolean>;
 
 	constructor(
 		private changeDetector: ChangeDetectorRef,
@@ -45,6 +51,13 @@ export class HomeComponent implements OnDestroy, OnInit {
 			});
 			this.changeDetector.markForCheck();
 		});
+
+		this.isLoading$
+			.pipe(takeUntil(this.ngUnsubscribe))
+			.subscribe((isLoading: boolean) => {
+				this.isLoading = isLoading;
+				this.changeDetector.markForCheck();
+			});
 	}
 	ngOnDestroy(): void {
 		this.ngUnsubscribe.next();
