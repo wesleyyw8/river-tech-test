@@ -36,7 +36,8 @@ Create a mini casino website which contains;
       **I could handle it in the selector side but I'd decided to do it in the component side. there is a function on the games.component that handles it called filterGames**  
       - [ ]	* Provider list should be updated depending on the searched results only (from the email: It should update only on the search term search, meaning only when the user has typed a search, it should ignore the provider list filtering. If you have anymore questions let me know.)  
       So If the user types something on the searchbox it will ignore the providers checkbox and it will filter those providers  
-      
+      **I think this will make 
+
     - [x] * Search and providers filtering should work in conjunction e.g. `http://localhost:4200/games?searchTerm=book&provider=Kalamba%20Games`  
       **I have a updateSearchTerm function on the games component to update the querystring parameter whenever the user selects a provider from the dropdownlist or type something on the search text**
       - [x]  * Refreshing should keep the user's filter / search  
@@ -82,7 +83,8 @@ Create a mini casino website which contains;
   * Best practices  
   **I removed the shared module and integrated its components and services directly into the pages module since all three pages of the application require the same functionality. Furthermore, I reorganized the project structure by placing components that do not connect with the store into the components folder and those that do connect with the store into the containers folder**
   * Code structure, readability and reusability
-  * Error handling
+  * Error handling  
+  **there is an alert when things go wrong**
   * Performance considerations  
   **since im not using the async pipe, im unsubscribing for all subscriptions when the component destroyes. in addition to that, Im caching the http get request** 
   * RxJS operators usage  

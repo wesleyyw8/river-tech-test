@@ -5,7 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
-import { AppPagesModule } from './pages/pages.module';
+import { AppGamesModule } from './games/games.module';
 import { NgxsModule } from '@ngxs/store';
 import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 import { NgxsEffectsModule } from 'ngxs-effects';
@@ -17,7 +17,7 @@ import { NgxsEffectsModule } from 'ngxs-effects';
 		HttpClientModule,
 		RouterModule,
 		BrowserModule,
-		AppPagesModule,
+		AppGamesModule,
 		NgxsModule.forRoot(),
 		NgxsEffectsModule.forRoot(),
 		NgxsReduxDevtoolsPluginModule.forRoot()
