@@ -28,13 +28,18 @@ export class GamesEffects {
 					this.store.dispatch(new ShowLoader());
 					return this.gameService.getAll$().pipe(
 						map((games) => this.store.dispatch(new LoadGamesSuccess(games))),
-						catchError((error) => throwError(`Error loading games: ${error}`))
+						catchError((error) => {
+							return throwError(`Error loading games: ${error.message}`);
+						})
 					);
 				})
 			)
 			.subscribe({
 				next: () => {
 					this.store.dispatch(new HideLoader());
+				},
+				error: (err) => {
+					alert(err);
 				}
 			});
 	}

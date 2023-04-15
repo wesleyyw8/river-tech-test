@@ -34,7 +34,9 @@ Create a mini casino website which contains;
       **The native select multiple tag was very buggy for this one so I used a div with checkboxes to achieve it**
       - [x]	* When selecting/deselecting a provider from the list it should be reflected inside the url  
       **I could handle it in the selector side but I'd decided to do it in the component side. there is a function on the games.component that handles it called filterGames**  
-      - [ ]	* Provider list should be updated depending on the searched results only
+      - [ ]	* Provider list should be updated depending on the searched results only (from the email: It should update only on the search term search, meaning only when the user has typed a search, it should ignore the provider list filtering. If you have anymore questions let me know.)  
+      So If the user types something on the searchbox it will ignore the providers checkbox and it will filter those providers  
+      
     - [x] * Search and providers filtering should work in conjunction e.g. `http://localhost:4200/games?searchTerm=book&provider=Kalamba%20Games`  
       **I have a updateSearchTerm function on the games component to update the querystring parameter whenever the user selects a provider from the dropdownlist or type something on the search text**
       - [x]  * Refreshing should keep the user's filter / search  
