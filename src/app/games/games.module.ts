@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { HomeComponent } from './containers/home/home.component';
-import { AppPagesRoutingModule } from './pages-routing.module';
+import { AppGamesRoutingModule } from './games-routing.module';
 import { NgxsModule } from '@ngxs/store';
 import { GamesState } from './state/games.state';
 import { NgxsEffectsModule } from 'ngxs-effects';
@@ -23,7 +23,7 @@ const COMPONENTS = [
 @NgModule({
 	imports: [
 		CommonModule,
-		AppPagesRoutingModule,
+		AppGamesRoutingModule,
 		NgxsModule.forFeature([GamesState]),
 		NgxsEffectsModule.forFeature(GamesEffects),
 		ReactiveFormsModule,
@@ -33,4 +33,4 @@ const COMPONENTS = [
 	exports: [...COMPONENTS],
 	providers: [GameMockClient]
 })
-export class AppPagesModule {}
+export class AppGamesModule {}
