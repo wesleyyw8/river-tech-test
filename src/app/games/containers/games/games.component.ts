@@ -128,13 +128,6 @@ export class GamesComponent implements OnDestroy, OnInit {
 		});
 	}
 
-	private filterProvidersList(): void {
-		const allProviders: string[] = this.games.map(
-			(item: Game) => item.providerName
-		);
-		this.providerData = [...new Set(allProviders)];
-	}
-
 	private subscribeToCheckboxChange(): void {
 		this.checkboxChangeSubject$
 			.pipe(takeUntil(this.destroy$))
@@ -164,7 +157,6 @@ export class GamesComponent implements OnDestroy, OnInit {
 			queryParamsHandling: 'merge'
 		});
 		this.filterGames(this.searchField.value, this.checkedProviders);
-		this.filterProvidersList();
 	}
 
 	private updateSelectedProviders(checkedProviders: string[]): void {
@@ -194,6 +186,14 @@ export class GamesComponent implements OnDestroy, OnInit {
 			}
 		});
 
+		this.filterProvidersList();
 		this.changeDetector.markForCheck();
+	}
+
+	private filterProvidersList(): void {
+		const allProviders: string[] = this.games.map(
+			(item: Game) => item.providerName
+		);
+		this.providerData = [...new Set(allProviders)];
 	}
 }
