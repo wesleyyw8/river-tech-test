@@ -5,7 +5,10 @@
     "ng": "ng",
     "start": "ng serve -o",
     "build": "ng build",
-    "lint": "npx eslint 'src/**/*.{js,jsx,ts,tsx,html,css,scss}' --quiet --fix"
+    "lint": "npx eslint 'src/**/*.{js,jsx,ts,tsx,html,css,scss}' --quiet --fix",
+    "e2e": "ng e2e",
+    "cypress:open": "cypress open",
+    "cypress:run": "cypress run"
   },
   "private": true,
   "dependencies": {
@@ -35,10 +38,12 @@
     "@angular-eslint/template-parser": "12.7.0",
     "@angular/cli": "~12.2.15",
     "@angular/compiler-cli": "~12.2.16",
+    "@cypress/schematic": "^2.4.0",
     "@types/jasmine": "~3.6.0",
     "@types/node": "^12.11.1",
     "@typescript-eslint/eslint-plugin": "4.28.2",
     "@typescript-eslint/parser": "4.28.2",
+    "cypress": "^12.9.0",
     "eslint": "^7.26.0",
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-prettier": "^4.2.1",

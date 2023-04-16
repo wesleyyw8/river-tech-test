@@ -31,6 +31,7 @@ export class GamesState {
 		action: LoadGamesSuccess
 	) {
 		const state = ctx.getState();
+		// console.log('here ', action.payload)
 		ctx.setState({
 			...state,
 			games: [...action.payload]
@@ -51,7 +52,10 @@ export class GamesState {
 			lastPlayedGames: [...lastPlayedGames, action.payload]
 		});
 		// eslint-disable-next-line no-undef
-		localStorage.setItem('lastPlayedGames', JSON.stringify(lastPlayedGames));
+		localStorage.setItem(
+			'lastPlayedGames',
+			JSON.stringify(lastPlayedGames.reverse())
+		);
 	}
 
 	@Action(ShowLoader)

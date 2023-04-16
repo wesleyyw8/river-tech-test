@@ -13,7 +13,8 @@ const ROUTES: Routes = [
 	{
 		path: 'games/detail/:slug',
 		component: GameDetailComponent
-	}
+	},
+	{ path: '**', redirectTo: '' }
 ];
 
 @NgModule({

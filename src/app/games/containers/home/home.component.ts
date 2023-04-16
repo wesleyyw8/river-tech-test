@@ -46,7 +46,7 @@ export class HomeComponent implements OnDestroy, OnInit {
 
 		this.games$.pipe(takeUntil(this.ngUnsubscribe)).subscribe((games) => {
 			this.gamesData = [];
-			games.forEach((game: GameInterface) => {
+			games?.forEach((game: GameInterface) => {
 				this.gamesData.push(new Game(game));
 			});
 			this.changeDetector.markForCheck();
