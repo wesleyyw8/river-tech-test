@@ -86,14 +86,14 @@ Create a mini casino website which contains;
   * Error handling  
   **there is an alert when things go wrong**
   * Performance considerations  
-  **since im not using the async pipe, im unsubscribing for all subscriptions when the component destroyes. in addition to that, Im caching the http get request** 
+  **since im not using the async pipe, im unsubscribing for all subscriptions when the component destroyes. in addition to that, Im caching the http get request**  
   * RxJS operators usage  
   **i used high order observables on the effects, to dispatch the loader actions and fetch the API, used some operators like map and filters. So there´s plenty of it**  
   * Redux State  
-  **using the ngxs you placed for me in the package.json**  
+  **used ngxs previously placed in the package.json**   
   * Modelling data with TypeScript  
   **I have made the project more object-oriented by introducing the game interface and the game model. This allows for a more structured and organized approach to the implementation of games within the application.**  
   * Polished Design
-  **My design skills are not that great, but if you give me a prototype I can match it. So I did some transitons but nothing super fancy**
+  **I did some transitions, worried about mobile, tablet screens.**  
   * SCSS usage  
   **Done**  
