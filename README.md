@@ -1,6 +1,7 @@
 # River Tech FE Interview
 
 ## Instructions
+I did all the requirements and I included cypress tests. you can run it with the command cypress:run  
 
 ### Requirements
 
