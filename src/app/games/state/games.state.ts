@@ -51,10 +51,11 @@ export class GamesState {
 			...state,
 			lastPlayedGames: [...lastPlayedGames, action.payload]
 		});
+
 		// eslint-disable-next-line no-undef
 		localStorage.setItem(
 			'lastPlayedGames',
-			JSON.stringify(lastPlayedGames.reverse())
+			JSON.stringify([...lastPlayedGames, action.payload].reverse())
 		);
 	}
 
